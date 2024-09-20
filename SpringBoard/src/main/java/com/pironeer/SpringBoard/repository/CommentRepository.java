@@ -45,4 +45,8 @@ public class CommentRepository {
     public Optional<Comment> findById(Long cmt_id) {
         return Optional.ofNullable(commentMap.get(cmt_id));
     }
+
+    public void deleteCmtById(Long cmt_id) {
+        commentMap.remove(cmt_id);
+    }
 }

@@ -52,4 +52,8 @@ public class CommentService {
         List<Comment> re_cmt = commentRepository.findByParentId(parentId);
         return re_cmt.stream().map(CommentResponse::of).toList();
     }
+
+    public void deleteCmt(Long cmt_id) {
+        commentRepository.deleteCmtById(cmt_id);
+    }
 }

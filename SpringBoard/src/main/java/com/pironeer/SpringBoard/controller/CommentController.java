@@ -39,6 +39,17 @@ public class CommentController {
         }
     }
 
+    @DeleteMapping("/{cmtId}")
+    @Operation(summary = "댓글 삭제")
+    public ResponseEntity<?> deleteCmt(@PathVariable("cmtId") Long cmt_id) {
+        try {
+            commentService.deleteCmt(cmt_id);
+            return ResponseEntity.ok().build();
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
     @GetMapping
     @Operation(summary = "모든 댓글 조회")
     public ResponseEntity<List<CommentResponse>> getAllComments() {
