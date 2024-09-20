@@ -1,6 +1,7 @@
 package com.pironeer.SpringBoard.service;
 
 import com.pironeer.SpringBoard.dto.request.CommentCreateRequest;
+import com.pironeer.SpringBoard.dto.request.CommentUpdateRequest;
 import com.pironeer.SpringBoard.repository.domain.Comment;
 import com.pironeer.SpringBoard.dto.response.CommentResponse;
 import com.pironeer.SpringBoard.mapper.CommentMapper;
@@ -16,8 +17,20 @@ import java.util.stream.Collectors;
 public class CommentService {
     private final CommentRepository commentRepository;
 
+    // 댓글 작성
     public void saveComment(CommentCreateRequest request) {
         commentRepository.save(CommentMapper.from(request));
+    }
+
+    // 댓글 수정
+    public CommentResponse updateComment(CommentUpdateRequest request) {
+        Comment comment = commentRepository.findById(request.cmt_id())
+                .orElseThrow(() -> new RuntimeException("댓글을 찾을 수 없습니다"));
+
+        comment.update(request.cmt_cnt());
+        commentRepository.save(comment);
+
+        return CommentResponse.of(comment);
     }
 
     // 전체 댓글 조회

@@ -1,6 +1,7 @@
 package com.pironeer.SpringBoard.controller;
 
 import com.pironeer.SpringBoard.dto.request.CommentCreateRequest;
+import com.pironeer.SpringBoard.dto.request.CommentUpdateRequest;
 import com.pironeer.SpringBoard.dto.response.CommentResponse;
 import com.pironeer.SpringBoard.service.CommentService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -25,6 +26,17 @@ public class CommentController {
     public ResponseEntity<?> create(@Valid @RequestBody CommentCreateRequest request) {
         commentService.saveComment(request);
         return ResponseEntity.ok().build();
+    }
+
+    @PutMapping
+    @Operation(summary = "댓글 수정")
+    public ResponseEntity<?> updateComment(@Valid @RequestBody CommentUpdateRequest request) {
+        try {
+            CommentResponse response = commentService.updateComment(request);
+            return ResponseEntity.ok(response);
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @GetMapping

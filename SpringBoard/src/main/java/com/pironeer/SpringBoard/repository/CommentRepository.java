@@ -3,10 +3,7 @@ package com.pironeer.SpringBoard.repository;
 import com.pironeer.SpringBoard.repository.domain.Comment;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 
@@ -25,6 +22,7 @@ public class CommentRepository {
         }
     }
 
+    // 모든 댓글 찾기
     public List<Comment> findAll() {
         return new ArrayList<>(commentMap.values());
     }
@@ -41,5 +39,10 @@ public class CommentRepository {
         return commentMap.values().stream() // 저장된 모든 댓글을 스트림으로 변환
                 .filter(comment -> parentId.equals(comment.getParent_id())) // 해당 댓글들 필터링
                 .collect(Collectors.toList());
+    }
+
+    //id로 댓글 찾기
+    public Optional<Comment> findById(Long cmt_id) {
+        return Optional.ofNullable(commentMap.get(cmt_id));
     }
 }
