@@ -27,6 +27,13 @@ public class CommentController {
         return ResponseEntity.ok().build();
     }
 
+    @GetMapping
+    @Operation(summary = "모든 댓글 조회")
+    public ResponseEntity<List<CommentResponse>> getAllComments() {
+        List<CommentResponse> responses = commentService.findAllComments();
+        return ResponseEntity.ok(responses);
+    }
+
     // 특정 게시물의 모든 댓글 조회
     @GetMapping("/topic/{topicId}")
     @Operation(summary = "특정 게시물의 모든 댓글 조회")

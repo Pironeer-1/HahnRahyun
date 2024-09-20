@@ -9,6 +9,7 @@ import com.pironeer.SpringBoard.repository.CommentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -17,6 +18,14 @@ public class CommentService {
 
     public void saveComment(CommentCreateRequest request) {
         commentRepository.save(CommentMapper.from(request));
+    }
+
+    // 전체 댓글 조회
+    public List<CommentResponse> findAllComments() {
+        List<Comment> comments = commentRepository.findAll();
+        return comments.stream()
+                .map(CommentResponse::of)
+                .collect(Collectors.toList());
     }
 
     // 게시물 id로 모든 댓글 조회

@@ -3,6 +3,7 @@ package com.pironeer.SpringBoard.repository;
 import com.pironeer.SpringBoard.repository.domain.Comment;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +23,10 @@ public class CommentRepository {
         } else { // 이미 해당 id값이 있는 경우
             commentMap.replace(comment.getCmt_id(), comment); // 새로운 댓글로 교체
         }
+    }
+
+    public List<Comment> findAll() {
+        return new ArrayList<>(commentMap.values());
     }
 
     // 특정 게시글에 대한 모든 댓글 조회
