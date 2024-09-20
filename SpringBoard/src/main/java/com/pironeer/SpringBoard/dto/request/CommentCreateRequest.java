@@ -11,6 +11,6 @@ public record CommentCreateRequest(
         Long parent_id, // 부모 댓글의 id, 값이 null이면 댓글 있으면 대댓글
 
         @NotBlank // 댓글 내용에 null 또는 빈 문자열 안됨
-        //@Schema(description = "댓글 내용", example = "내용입니다")
+        @Schema(description = "댓글 내용", example = "내용입니다")
         String cmt_cnt) {
 }
