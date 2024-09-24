@@ -24,10 +24,10 @@ public class CommentService {
 
     // 댓글 수정
     public CommentResponse updateComment(CommentUpdateRequest request) {
-        Comment comment = commentRepository.findById(request.cmt_id())
+        Comment comment = commentRepository.findById(request.cmtId())
                 .orElseThrow(() -> new RuntimeException("댓글을 찾을 수 없습니다"));
 
-        comment.update(request.cmt_cnt());
+        comment.update(request.cmtCnt());
         commentRepository.save(comment);
 
         return CommentResponse.of(comment);
@@ -53,7 +53,7 @@ public class CommentService {
         return re_cmt.stream().map(CommentResponse::of).toList();
     }
 
-    public void deleteCmt(Long cmt_id) {
-        commentRepository.deleteCmtById(cmt_id);
+    public void deleteCmt(Long cmtId) {
+        commentRepository.deleteCmtById(cmtId);
     }
 }

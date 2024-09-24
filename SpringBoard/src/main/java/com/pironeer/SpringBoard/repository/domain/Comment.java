@@ -7,31 +7,31 @@ import java.time.LocalDateTime;
 
 @Data
 public class Comment {
-    private Long cmt_id; // 댓글 id (pk)
-    private Long topic_id; // 게시물 id (외래키)
-    private Long parent_id; // 부모 댓글 id, 값이 있으면 대댓글
-    private String cmt_cnt; // 댓글 내용
-    private LocalDateTime cmt_createdAt; // 댓글 생성 시간
-    private LocalDateTime cmt_updatedAt;
+    private Long cmtId; // 댓글 id (pk)
+    private Long topicId; // 게시물 id (외래키)
+    private Long parentId; // 부모 댓글 id, 값이 있으면 대댓글
+    private String cmtCnt; // 댓글 내용
+    private LocalDateTime cmtCreatedAt; // 댓글 생성 시간
+    private LocalDateTime cmtUpdatedAt;
 
     @Builder
     public Comment(
-            Long cmt_id,
-            Long topic_id,
-            Long parent_id,
-            String cmt_cnt,
-            LocalDateTime cmt_createdAt,
-            LocalDateTime cmt_updatedAt) {
-        this.cmt_id = cmt_id;
-        this.topic_id = topic_id;
-        this.parent_id = parent_id;
-        this.cmt_cnt = cmt_cnt;
-        this.cmt_createdAt = cmt_createdAt;
-        this.cmt_updatedAt = cmt_updatedAt;
+            Long cmtId,
+            Long topicId,
+            Long parentId,
+            String cmtCnt,
+            LocalDateTime cmtCreatedAt,
+            LocalDateTime cmtUpdatedAt) {
+        this.cmtId = cmtId;
+        this.topicId = topicId;
+        this.parentId = parentId;
+        this.cmtCnt = cmtCnt;
+        this.cmtCreatedAt = cmtCreatedAt;
+        this.cmtUpdatedAt = cmtUpdatedAt;
     }
 
-    public void update(String cmt_cnt) {
-        this.cmt_cnt = cmt_cnt;
-        this.cmt_updatedAt = LocalDateTime.now();
+    public void update(String cmtCnt) {
+        this.cmtCnt = cmtCnt;
+        this.cmtUpdatedAt = LocalDateTime.now();
     }
 }

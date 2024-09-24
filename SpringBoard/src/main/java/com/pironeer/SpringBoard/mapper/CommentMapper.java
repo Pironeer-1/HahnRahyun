@@ -11,10 +11,10 @@ public class CommentMapper {
     public static Comment from(CommentCreateRequest request) {
         LocalDateTime now = LocalDateTime.now();
         return Comment.builder()
-                .topic_id(request.topic_id())
-                .parent_id(request.parent_id())
-                .cmt_cnt(request.cmt_cnt())
-                .cmt_createdAt(now)
+                .topicId(request.topicId())
+                .parentId(request.parentId())
+                .cmtCnt(request.cmtCnt())
+                .cmtCreatedAt(now)
                 .build();
     }
 }

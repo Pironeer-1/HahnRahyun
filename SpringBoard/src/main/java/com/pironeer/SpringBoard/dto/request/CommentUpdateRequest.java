@@ -7,10 +7,10 @@ import jakarta.validation.constraints.NotNull;
 public record CommentUpdateRequest(
         @NotNull
         @Schema(description = "수정할 댓글 id", example = "1")
-        Long cmt_id,
+        Long cmtId,
 
         @NotBlank
         @Schema(description = "댓글 내용", example = "수정된 댓글 내용입니다")
-        String cmt_cnt
+        String cmtCnt
 ) {
 }
