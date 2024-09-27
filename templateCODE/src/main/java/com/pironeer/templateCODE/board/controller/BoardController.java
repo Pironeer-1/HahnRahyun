@@ -47,4 +47,11 @@ public class BoardController {
         BoardResponse response = boardService.update(request);
         return ResponseEntity.ok().body(response);
     }
+
+    @DeleteMapping("/{boardId}")
+    @Operation(summary = "게시글 삭제")
+    public ResponseEntity<?> delete(@PathVariable("boardId") Long id) {
+        boardService.deleteById(id);
+        return ResponseEntity.ok().build();
+    }
 }

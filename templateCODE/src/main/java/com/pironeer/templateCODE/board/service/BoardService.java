@@ -29,14 +29,20 @@ public class BoardService {
     // 게시글 id로 조회하기
     public BoardResponse findById(Long id) {
         Board board = boardRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("게시글을 찾을 수 없습니다"));
+                .orElseThrow(() -> new RuntimeException("TOPIC NOT FOUND"));
         return BoardResponse.of(board);
     }
 
+    // 게시글 수정
     public BoardResponse update(BoardUpdateRequest request) {
         Board board = boardRepository.findById(request.id())
                 .orElseThrow(() -> new RuntimeException("TOPIC NOT FOUND"));
         boardRepository.update(board.update(request));
         return BoardResponse.of(board);
+    }
+
+    // 게시글 삭제
+    public void deleteById(Long id) {
+        boardRepository.deleteById(id);
     }
 }

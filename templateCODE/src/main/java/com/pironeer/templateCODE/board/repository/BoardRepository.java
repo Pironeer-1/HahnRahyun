@@ -36,4 +36,9 @@ public class BoardRepository {
     public void update(Board board) {
         boardMap.replace(board.getId(), board);
     }
+
+    // 게시글 삭제
+    public void deleteById(Long id) {
+        boardMap.remove(id);
+    }
 }
