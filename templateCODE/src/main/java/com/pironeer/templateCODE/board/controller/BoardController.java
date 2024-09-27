@@ -1,16 +1,16 @@
 package com.pironeer.templateCODE.board.controller;
 
 import com.pironeer.templateCODE.board.dto.request.BoardCreateRequest;
+import com.pironeer.templateCODE.board.dto.response.BoardResponse;
 import com.pironeer.templateCODE.board.service.BoardService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -24,5 +24,19 @@ public class BoardController {
     public ResponseEntity<?> create(@Valid @RequestBody BoardCreateRequest request) {
         boardService.save(request);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping()
+    @Operation(summary = "전체 게시글 조회")
+    public ResponseEntity<?> readAll() {
+        List<BoardResponse> responses = boardService.findAll();
+        return ResponseEntity.ok().body(responses);
+    }
+
+    @GetMapping("/{boardId}")
+    @Operation(summary = "id로 게시글 조회")
+    public ResponseEntity<?> read(@PathVariable("boardId") Long id) {
+        BoardResponse response = boardService.findById(id);
+        return ResponseEntity.ok().body(response);
     }
 }
