@@ -1,6 +1,7 @@
 package com.pironeer.templateCODE.board.controller;
 
 import com.pironeer.templateCODE.board.dto.request.BoardCreateRequest;
+import com.pironeer.templateCODE.board.dto.request.BoardUpdateRequest;
 import com.pironeer.templateCODE.board.dto.response.BoardResponse;
 import com.pironeer.templateCODE.board.service.BoardService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -37,6 +38,13 @@ public class BoardController {
     @Operation(summary = "id로 게시글 조회")
     public ResponseEntity<?> read(@PathVariable("boardId") Long id) {
         BoardResponse response = boardService.findById(id);
+        return ResponseEntity.ok().body(response);
+    }
+
+    @PutMapping
+    @Operation(summary = "게시글 수정")
+    public ResponseEntity<?> update(@Valid @RequestBody BoardUpdateRequest request) {
+        BoardResponse response = boardService.update(request);
         return ResponseEntity.ok().body(response);
     }
 }

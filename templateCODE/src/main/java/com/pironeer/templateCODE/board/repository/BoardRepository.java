@@ -31,4 +31,9 @@ public class BoardRepository {
         Assert.notNull(id, "ID는 null일 수 없습니다");
         return Optional.ofNullable(boardMap.get(id));
     }
+
+    // 게시글 수정
+    public void update(Board board) {
+        boardMap.replace(board.getId(), board);
+    }
 }

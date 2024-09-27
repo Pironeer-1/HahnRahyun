@@ -1,5 +1,6 @@
 package com.pironeer.templateCODE.board.entity;
 
+import com.pironeer.templateCODE.board.dto.request.BoardUpdateRequest;
 import lombok.Builder;
 import lombok.Data;
 
@@ -25,5 +26,12 @@ public class Board {
         this.content = content;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+    }
+
+    public Board update(BoardUpdateRequest request) {
+        this.title = request.title();
+        this.content = request.content();
+        this.updatedAt = LocalDateTime.now();
+        return this;
     }
 }

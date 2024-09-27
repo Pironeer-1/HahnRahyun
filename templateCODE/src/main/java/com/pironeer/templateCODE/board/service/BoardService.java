@@ -1,6 +1,7 @@
 package com.pironeer.templateCODE.board.service;
 
 import com.pironeer.templateCODE.board.dto.request.BoardCreateRequest;
+import com.pironeer.templateCODE.board.dto.request.BoardUpdateRequest;
 import com.pironeer.templateCODE.board.dto.response.BoardResponse;
 import com.pironeer.templateCODE.board.entity.Board;
 import com.pironeer.templateCODE.board.repository.BoardRepository;
@@ -8,6 +9,7 @@ import com.pironeer.templateCODE.global.mapper.BoardMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -28,6 +30,13 @@ public class BoardService {
     public BoardResponse findById(Long id) {
         Board board = boardRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("게시글을 찾을 수 없습니다"));
+        return BoardResponse.of(board);
+    }
+
+    public BoardResponse update(BoardUpdateRequest request) {
+        Board board = boardRepository.findById(request.id())
+                .orElseThrow(() -> new RuntimeException("TOPIC NOT FOUND"));
+        boardRepository.update(board.update(request));
         return BoardResponse.of(board);
     }
 }
